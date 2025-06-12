@@ -16,10 +16,10 @@ public class Monster extends Character {
      * - as area increases, the stats of the monster also increases
      * - will use ARRAYLIST to organize monsters according to their area
      * 
-     * TO DO: 
+     * TO DO:
      * - change monster stats
      * - add spawn chance
-     * - damage implementation 
+     * - damage implementation
      * - overall implementation (call to main)
      * 
      * Woods: 2 enemies 1 special ability per enemy
@@ -27,7 +27,7 @@ public class Monster extends Character {
      * Village: 4 enemies 1 special ability per enemy
      * 
      * FOR BOSSES:
-     * Mountain Boss: 
+     * Mountain Boss:
      * Ocean Boss:
      */
 
@@ -42,13 +42,13 @@ public class Monster extends Character {
     public static final Monster santelmo = new Monster("Santelmo", 150, 20, 30, 15, 23);
 
     // VILLAGE
-    public static final Monster manananggal = new Monster("Manananggal", 200, 30, 40,15, 31);
+    public static final Monster manananggal = new Monster("Manananggal", 200, 30, 40, 15, 31);
     public static final Monster tikbalang = new Monster("Tikbalang", 200, 30, 40, 15, 32);
     public static final Monster tiyanak = new Monster("Tiyanak", 200, 30, 40, 20, 33);
     public static final Monster bruha = new Monster("Bruha", 200, 30, 40, 20, 34);
 
-    // Like weaponSpawn in Player.java, each arraylist will have a spwan chances  
-
+    public static final Monster minokawa = new Monster("Minokawa", 300, 30, 40, 30, 41);
+    public static final Monster bakunawa = new Monster("Bakunawa", 300, 30, 40, 30, 42);
     public static final ArrayList<Monster> woodMonsters = new ArrayList<Monster>() {
         {
             add(sigbin);
@@ -88,9 +88,20 @@ public class Monster extends Character {
     public String getName() {
         return super.getName();
     }
-    
+
     public void getSkill(Monster monster, Player player) {
         monsterSkill.identifySkill(id, monster, player);
+    }
+
+    private int maxHealth = super.getHealth(); 
+    
+    @Override
+    public int getHealth() {
+        return health;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
 }
