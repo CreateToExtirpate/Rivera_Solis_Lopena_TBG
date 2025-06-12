@@ -57,13 +57,15 @@ public class Player {
 
     public String getWeaponName() {
         return equipped.getName();
-    }    
+    }
 
-    public void lootBody(String monsterName){ 
+    public void lootBody(String monsterName) {
         inventory.spawnLoot(monsterName);
     }
-    //Player Health Bar
-    public void getPlayerHealthBar(){
+
+    // Player Health Bar
+    public void getPlayerHealthBar() {
         healthBar.displayHealth(health);
     }
+
 }
