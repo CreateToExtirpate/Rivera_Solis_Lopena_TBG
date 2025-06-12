@@ -10,15 +10,16 @@ public class Inventory {
     private final int maxHealth;
     private static int currentHealth;
     private static final Random randomNum = new Random();
-    private static final Scanner scn = new Scanner(System.in); //Scanner for input
-    private static final HashMap<String, Stack<Integer>> items = new HashMap<>(); //Hashmap for Item Name and Health Points
+    private static final Scanner scn = new Scanner(System.in); // Scanner for input
+    private static final HashMap<String, Stack<Integer>> items = new HashMap<>(); // Hashmap for Item Name and Health
+                                                                                  // Points
 
     public Inventory(int maxHealth) {
         initializeItems();
         this.maxHealth = maxHealth;
     }
 
-    //Inserts all items to the HashMap when inventory is initialized
+    // Inserts all items to the HashMap when inventory is initialized
     private void initializeItems() {
         items.put("suman", createStack(20));
         items.put("maruya", createStack(30));
@@ -27,15 +28,15 @@ public class Inventory {
         items.put("atis", createStack(60));
     }
 
-    //Creates stacks automatically, pushes the passed integer
+    // Creates stacks automatically, pushes the passed integer
     private static Stack<Integer> createStack(int hp) {
         Stack<Integer> food = new Stack<>();
         food.push(hp);
         return food;
     }
 
-    //Shows prompts to interact with inventory
-    //When finished, returns with player's updated or same health.
+    // Shows prompts to interact with inventory
+    // When finished, returns with player's updated or same health.
     public int showInventory(int playerHealth, HealthBar hpBar, boolean inBattle) {
         currentHealth = playerHealth;
 
@@ -84,7 +85,7 @@ public class Inventory {
         return currentHealth;
     }
 
-    //Checks if user's choice matches with a key to avoid exceptions
+    // Checks if user's choice matches with a key to avoid exceptions
     private String readChoice(String choice) {
         String itemName = null;
 
@@ -98,7 +99,8 @@ public class Inventory {
         return itemName;
     }
 
-    //To check how much hp an item will restore, the hp point of an item is peeked and displayed.
+    // To check how much hp an item will restore, the hp point of an item is peeked
+    // and displayed.
     private void check(String itemName) {
         if (itemName == null) {
             System.out.println("Invalid item choice.");
@@ -113,7 +115,7 @@ public class Inventory {
         }
     }
 
-    //To regain health, item hp are popped from stack and added to player's health
+    // To regain health, item hp are popped from stack and added to player's health
     private void use(String itemName, HealthBar hpBar) {
         if (itemName == null) {
             System.out.println("Invalid item choice.");
@@ -143,7 +145,7 @@ public class Inventory {
     }
 
     public void spawnLoot(String monsterName) {
-        if (randomNum.nextDouble() > 0.2) { //80% chance to get an item
+        if (randomNum.nextDouble() > 0.2) { // 80% chance to get an item
             int lootSpawn = randomNum.nextInt(5);
 
             String randomItem = null;
@@ -176,13 +178,13 @@ public class Inventory {
                 System.out.print("Unfortunately, your sako cannot hold any more " + randomItem + ".");
                 return;
             }
-            
+
             System.out.print(capitalize(randomItem) + " was added to your sako!");
             items.get(randomItem).push(itemHp);
         }
     }
 
-    //To show item names, the first letter of the key name is capitalized.
+    // To show item names, the first letter of the key name is capitalized.
     private String capitalize(String name) {
         return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
