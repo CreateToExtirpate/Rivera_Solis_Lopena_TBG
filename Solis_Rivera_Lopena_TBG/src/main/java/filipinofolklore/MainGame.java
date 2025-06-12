@@ -10,7 +10,6 @@ public class MainGame {
     private static Player player;
     private static MonsterHandler monsterHandler;
     private static final Travel travel = new Travel();
-    ;
     private static final Scanner scn = new Scanner(System.in);
     private static final Colors color = new Colors();
     private static boolean inGame = true;
@@ -25,7 +24,7 @@ public class MainGame {
             System.out.println(color.red() + "================================");
             System.out.println("||                            ||");
             System.out.println("||                            ||");
-            System.out.println("||       Seek ye Horror       ||");
+            System.out.println("||         Java Swang         ||");
             System.out.println("||                            ||");
             System.out.println("||                            ||");
             System.out.println("================================");
@@ -79,7 +78,7 @@ public class MainGame {
             if (moved) {
                 player.spawnWeapons(travel.getAreaCounter()); // Spawn weapon when moving tiles
                 monsterSpawned(); // Spawn Monster when moving tiles
-                //Ends the game when player dies.
+                // Ends the game when player dies.
                 if (inGame == false) {
                     travel.resetCounter();
                     break;
@@ -92,7 +91,9 @@ public class MainGame {
             System.out.println("");
             System.out.print(color.cyan() + pName + " HP: " + color.green());
             player.getPlayerHealthBar();
-            System.out.println(color.reset() + "||" + color.green() + " Walk " + color.reset() + "||" + color.yellow() + " Sako (Check Inventory) " + color.reset() + "||" + color.red() + " Exit (Main Menu)" + color.reset() + " ||");
+            System.out.println(color.reset() + "||" + color.green() + " Walk " + color.reset() + "||" + color.yellow()
+                    + " Sako (Check Inventory) " + color.reset() + "||" + color.red() + " Exit (Main Menu)"
+                    + color.reset() + " ||");
             System.out.print("> ");
             String action = scn.next();
 
@@ -125,13 +126,13 @@ public class MainGame {
         }
 
         // randomly picks monster and starts battle
-        if (!spawnTable.isEmpty()) {
-            Monster monster = spawnTable.get(rand.nextInt(spawnTable.size()));
-            startBattle(monster);
-            if (!monster.isAlive()) {
-                spawnTable.remove(monster);
-            }
+    if (spawnTable != null && !spawnTable.isEmpty()) {
+        Monster monster = spawnTable.get(rand.nextInt(spawnTable.size()));
+        startBattle(monster);
+        if (!monster.isAlive()) {
+            spawnTable.remove(monster);
         }
+    }
     }
 
     // Function to start battle with monster as parameter
@@ -146,7 +147,21 @@ public class MainGame {
             System.out.println(
                     "The mountain looms above you, the sky turns dark and the wind beginds to howl.\nA giant creature with incomprehensible nature stands before you.\nYou ready you weapon for the final showdown.");
             // INSERT BOSS BATTLE ENCOUNTER HERE
+            printMinokawa();
+            startBattle(Monster.minokawa);
 
+            if (!Monster.minokawa.isAlive()) {
+                System.out.println("You defeated the Minokawa!\n");
+                printMinokawa();
+                System.out.println("\nWith a final blow, the Minokawa crashes to the earth, defeated.");
+                System.out.println("\nLight returns to the sky as your journey comes to an end.\n");
+            } else {
+                System.out.println("You were defeated by the Minokawa!");
+                System.out.println("\nGAME OVER!\n");
+                System.out.println("You'll return to the Main Menu.\n");
+                inGame = false;
+                return;
+            }
             // CODE AFTER BATTLE ENDS
             System.out.println(
                     "After defeating the beast you run up the mountain eager to return home. Right below, you see your cozy little house.\nThen you notice a darkness growing in the sea beside the mountain, a new creature emerges... ");
@@ -160,12 +175,25 @@ public class MainGame {
                         choosing = false;
                         System.out.println(
                                 "\"You stare into the murky waters of the ocean, giant glowing eyes stare right back into your soul.\\n"
-                                + //
-                                "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
-                                + //
-                                "Exhausted but determined, you brandish your weapom.\"");
-                        // INSERT OPTIONAL BOSS BATTLE
+                                        + //
+                                        "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
+                                        + //
+                                        "Exhausted but determined, you brandish your weapom.\"");
+                        // INSERT BOSS BATTLE 
+                        printBakunawa();
+                        startBattle(Monster.bakunawa);
 
+                        if (!Monster.bakunawa.isAlive()) {
+                            printBakunawa();
+                            System.out.println("You defeated the Bakunawa!");
+                            System.out.println("\nCongratulations! You have completed the game!\n");
+                        } else {
+                            System.out.println("You were defeated by the Bakunawa!");
+                            System.out.println("\nGAME OVER!\n");
+                            System.out.println("You'll return to the Main Menu.\n");
+                            inGame = false;
+                            return;
+                        }
                         goHome();
                     }
                     case "no" -> {
@@ -182,11 +210,68 @@ public class MainGame {
     private static void goHome() {
         System.out.println("You went home.");
         inGame = false;
-
     }
 
     public static String getName() {
         return pName;
+    }
+
+    private static void printMinokawa() {
+        System.out.println("             /");
+        System.out.println("\\\\' ,      / //");
+        System.out.println(" \\\\//    _/ //'");
+        System.out.println("  \\_-//' /  //<'");
+        System.out.println("    \\ ///  >   \\\\`");
+        System.out.println("   /,)-^>>  _\\`");
+        System.out.println("   (/   \\\\ / \\\\");
+        System.out.println("         //  //\\\\\\");
+        System.out.println("        ((`");
+    }
+
+    public static void printBakunawa(){
+        System.out.println("                                        ,   ,");
+        System.out.println("                                        $,  $,     ,");
+        System.out.println("                                        \"ss.$ss. .s'");
+        System.out.println("                                ,     .ss$$$$$$$$$$s,");
+        System.out.println("                                $. s$$$$$$$$$$$$$$`$$Ss");
+        System.out.println("                                \"$$$$$$$$$$$$$$$$$$o$$$       ,");
+        System.out.println("                               s$$$$$$$$$$$$$$$$$$$$$$$$s,  ,s");
+        System.out.println("                              s$$$$$$$$$\"$$$$$$\"\"\"\"$$$$$$\"$$$$$,");
+        System.out.println("                              s$$$$$$$$$$s\"\"$$$$ssssss\"$$$$$$$$\"");
+        System.out.println("                             s$$$$$$$$$$'         `\"\"\"ss\"$\"$s\"\"");
+        System.out.println("                             s$$$$$$$$$$,              `\"\"\"\"\"$  .s$$s");
+        System.out.println("                             s$$$$$$$$$$$$s,...               `s$$'  `");
+        System.out.println("                         `ssss$$$$$$$$$$$$$$$$$$$$####s.     .$$\"$.   , s-");
+        System.out.println("                           `\"\"\"\"$$$$$$$$$$$$$$$$$$$$#####$$$$$$\"     $.$'");
+        System.out.println("                                 \"$$$$$$$$$$$$$$$$$$$$####s\"\"     .$$$|");
+        System.out.println("                                  \"$$$$$$$$$$$$$$$$$$$$$$$##s    .$$\" $");
+        System.out.println("                                   $$\"\"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\"   `");
+        System.out.println("                                  $$\"  \"$\"$$$$$$$$$$$$$$$$$$$$S\"\"\"\"'");
+        System.out.println("                             ,   ,\"     '  $$$$$$$$$$$$$$$$####s");
+        System.out.println("                             $.          .s$$$$$$$$$$$$$$$$$####\"");
+        System.out.println("                 ,           \"$s.   ..ssS$$$$$$$$$$$$$$$$$$$####\"");
+        System.out.println("                 $           .$$$S$$$$$$$$$$$$$$$$$$$$$$$$#####\"");
+        System.out.println("                 Ss     ..sS$$$$$$$$$$$$$$$$$$$$$$$$$$$######\"\"");
+        System.out.println("                  \"$$sS$$$$$$$$$$$$$$$$$$$$$$$$$$$########\"");
+        System.out.println("           ,      s$$$$$$$$$$$$$$$$$$$$$$$$#########\"\"'");
+        System.out.println("           $    s$$$$$$$$$$$$$$$$$$$$$#######\"\"'      s'         ,");
+        System.out.println("           $$..$$$$$$$$$$$$$$$$$$######\"'       ....,$$....    ,$");
+        System.out.println("            \"$$$$$$$$$$$$$$######\"' ,     .sS$$$$$$$$$$$$$$$$s$$");
+        System.out.println("              $$$$$$$$$$$$#####\"     $, .s$$$$$$$$$$$$$$$$$$$$$$$$s.");
+        System.out.println("   )          $$$$$$$$$$$#####'      `$$$$$$$$$###########$$$$$$$$$$$.");
+        System.out.println("  ((          $$$$$$$$$$$#####       $$$$$$$$###\"       \"####$$$$$$$$$$");
+        System.out.println("  ) \\         $$$$$$$$$$$$####.     $$$$$$###\"             \"###$$$$$$$$$   s'");
+        System.out.println(" (   )        $$$$$$$$$$$$$####.   $$$$$###\"                ####$$$$$$$$s$$'");
+        System.out.println(" )  ( (       $$\"$$$$$$$$$$$#####.$$$$$###'                .###$$$$$$$$$$\"");
+        System.out.println(" (  )  )   _,$\"   $$$$$$$$$$$$######.$$##'                .###$$$$$$$$$$");
+        System.out.println(" ) (  ( \\.         \"$$$$$$$$$$$$$#######,,,          ..####$$$$$$$$$$$\"");
+        System.out.println("(   )$ )  )        ,$$$$$$$$$$$$$$$$$$####################$$$$$$$$$$$\"");
+        System.out.println("(   ($$  ( \\     _sS\"  `\"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$S$$,");
+        System.out.println(" )  )$$$s ) )  .      .   `$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\"'  `$$");
+        System.out.println("  (   $$$Ss/  .$,    .$,,s$$$$$$##S$$$$$$$$$$$$$$$$$$$$$$$$S\"\"        '");
+        System.out.println("    \\)_$$$$$$$$$$$$$$$$$$$$$$$##\"  $$        `$$.        `$$.");
+        System.out.println("        `\"S$$$$$$$$$$$$$$$$$#\"      $          `$          `$");
+        System.out.println("            `\"\"\"\"\"\"\"\"\"\"\"\"\"'         '           '           '");
     }
     // END OF CLASS
 }
