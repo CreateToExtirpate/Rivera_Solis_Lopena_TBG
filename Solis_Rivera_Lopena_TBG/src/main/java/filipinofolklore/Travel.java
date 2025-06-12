@@ -44,7 +44,8 @@ public class Travel {
     //Ocean Area: OPTIONAL BOSSFIGHT
     //With the checkBoss() Function in MainGame.java, this array is no longer needed
     private static final String[] cliffs = {
-        "You stare into the murky waters of the ocean, giant glowing eyes stare right back into your soul.\nThe horrendous creature from the depths breaches the water's surface and stands face to face with you.\nExhausted but determined, you brandish your weapom."};
+        "You stare into the murky waters of the ocean, giant glowing eyes stare right back into your soul.\nThe horrendous creature from the depths breaches the water's surface and stands face to face with you.", 
+        "Exhausted but determined, you brandish your weapom."};
     
     //get size of area array
     private static int getAreaSize() {
