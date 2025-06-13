@@ -166,19 +166,15 @@ public class MainGame {
             System.out.println(
                     "After defeating the beast you run up the mountain eager to return home. Right below, you see your cozy little house.\nThen you notice a darkness growing in the sea beside the mountain, a new creature emerges... ");
             System.out.println("Will you proceed to battle with the Bakunawa just beyond the Cliffs? (yes/no)");
-            String choice = scn.next();
-
+            
             boolean choosing = true;
             while (choosing) {
+                String choice = scn.next();
                 switch (choice.toLowerCase()) {
                     case "yes" -> {
                         choosing = false;
                         System.out.println(
-                                "\"You stare into the murky waters of the ocean, giant glowing eyes stare right back into your soul.\\n"
-                                        + //
-                                        "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
-                                        + //
-                                        "Exhausted but determined, you brandish your weapom.\"");
+                                "You stare into the murky waters of the ocean, giant glowing eyes stare right back into your soul.\nThe horrendous creature from the depths breaches the water's surface and stands face to face with you.\nExhausted but determined, you brandish your weapom.");
                         // INSERT BOSS BATTLE 
                         printBakunawa();
                         startBattle(monsterHandler.getBakunawa());
@@ -208,7 +204,8 @@ public class MainGame {
     }
 
     private static void goHome() {
-        System.out.println("You went home.");
+        System.out.println("Tired, you went home.");
+        System.out.println();
         inGame = false;
     }
 
@@ -217,7 +214,7 @@ public class MainGame {
     }
 
     private static void printMinokawa() {
-        System.out.println("             /");
+        System.out.println(color.red() + "             /");
         System.out.println("\\\\' ,      / //");
         System.out.println(" \\\\//    _/ //'");
         System.out.println("  \\_-//' /  //<'");
@@ -225,11 +222,11 @@ public class MainGame {
         System.out.println("   /,)-^>>  _\\`");
         System.out.println("   (/   \\\\ / \\\\");
         System.out.println("         //  //\\\\\\");
-        System.out.println("        ((`");
+        System.out.println("        ((`" + color.reset());
     }
 
     public static void printBakunawa(){
-        System.out.println("                                        ,   ,");
+        System.out.println(color.cyan() + "                                        ,   ,");
         System.out.println("                                        $,  $,     ,");
         System.out.println("                                        \"ss.$ss. .s'");
         System.out.println("                                ,     .ss$$$$$$$$$$s,");
@@ -271,7 +268,7 @@ public class MainGame {
         System.out.println("  (   $$$Ss/  .$,    .$,,s$$$$$$##S$$$$$$$$$$$$$$$$$$$$$$$$S\"\"        '");
         System.out.println("    \\)_$$$$$$$$$$$$$$$$$$$$$$$##\"  $$        `$$.        `$$.");
         System.out.println("        `\"S$$$$$$$$$$$$$$$$$#\"      $          `$          `$");
-        System.out.println("            `\"\"\"\"\"\"\"\"\"\"\"\"\"'         '           '           '");
+        System.out.println("            `\"\"\"\"\"\"\"\"\"\"\"\"\"'         '           '           '" + color.reset());
     }
     // END OF CLASS
 }

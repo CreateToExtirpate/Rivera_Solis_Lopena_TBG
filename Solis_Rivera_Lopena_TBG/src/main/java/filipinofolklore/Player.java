@@ -3,7 +3,7 @@ package filipinofolklore;
 public class Player {
 
     int atkSpeed = 30;
-    int atkDmg = 1000000000;
+    int atkDmg = 300000000;
     int health = 100;
 
     private String name;

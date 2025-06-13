@@ -60,6 +60,7 @@ public class BattleEncounter {
                         }
                         case "sako" -> {
                             player.openInventory(true);
+                            monsterTurn();
                             validInput = true;
                         }
                         case "parry" -> {
