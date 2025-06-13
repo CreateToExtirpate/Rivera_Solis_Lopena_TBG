@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
 
+//Try to merge this
 public class Inventory {
 
     private final int maxHealth;
