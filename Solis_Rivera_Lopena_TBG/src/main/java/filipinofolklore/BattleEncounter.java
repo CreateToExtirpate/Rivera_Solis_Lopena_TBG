@@ -8,6 +8,7 @@ public class BattleEncounter {
     private final Monster monster;
     private final Travel travel;
     private final Scanner sc = new Scanner(System.in);
+    public int parryCounter = 0;
 
     public BattleEncounter(Player player, Monster monster, Travel travel) {
         this.player = player;
@@ -48,8 +49,10 @@ public class BattleEncounter {
                             System.out.println("You attack " + monster.getName() + " for " + damage
                                     + " damage! (Weapon: " + player.getWeaponName() + " dealt " + weaponDamage + ")\n");
 
+                            parryCounter++;
+
                             if (!monster.isAlive()) {
-                                // automatic end
+                                // Monster defeated, skip monster turn
                             } else {
                                 monsterTurn();
                             }
@@ -60,14 +63,35 @@ public class BattleEncounter {
                             validInput = true;
                         }
                         case "parry" -> {
+                            if (parryCounter >= 3) {
+                                System.out
+                                        .println("You parried " + monster.getName() + "! The monster skips its turn.");
+                                parryCounter = 0;
+                                // Attack the monster after parrying
+                                Weapon weapon = Player.getEquippedWeapon();
+                                int weaponDamage = 0;
+                                if (weapon != null) {
+                                    weaponDamage = weapon.getMin()
+                                            + (int) (Math.random() * (weapon.getMax() - weapon.getMin() + 1));
+                                }
+                                int damage = player.attack() + weaponDamage;
+                                monster.takeDamage(damage);
+                                System.out.println("You attack " + monster.getName() + " for " + damage
+                                        + " damage! (Weapon: " + player.getWeaponName() + " dealt " + weaponDamage
+                                        + ")\n");
+                            } else {
+                                System.out.println("Parry is not ready yet! (" + (3 - parryCounter) + " turns left)");
+                                parryCounter++;
+                                monsterTurn();
+                            }
                             validInput = true;
                         }
                         default -> {
                             System.out.println("Not a valid input. Please try again.\n");
-                            System.out.println(player.getName() + "'s HP:");
+                            System.out.print(player.getName() + "'s HP:");
                             player.getPlayerHealthBar();
 
-                            System.out.println(monster.getName() + "'s HP:");
+                            System.out.print(monster.getName() + "'s HP:");
                             monster.getHealthBar();
                         }
                     }
@@ -103,19 +127,41 @@ public class BattleEncounter {
                             monster.takeDamage(damage);
                             System.out.println("You attack " + monster.getName() + " for " + damage
                                     + " damage! (Weapon: " + player.getWeaponName() + " dealt " + weaponDamage + ")\n");
+                            parryCounter++;
 
                             if (!monster.isAlive()) {
-                                // automatic end
+                                // Monster defeated, skip monster turn
                             } else {
                                 monsterTurn();
                             }
                             validInput = true;
                         }
                         case "sako" -> {
+                            player.openInventory(true);
                             validInput = true;
                         }
                         case "parry" -> {
-
+                            if (parryCounter >= 3) {
+                                System.out
+                                        .println("You parried " + monster.getName() + "! The monster skips its turn.");
+                                parryCounter = 0;
+                                // Attack the monster after parrying
+                                Weapon weapon = Player.getEquippedWeapon();
+                                int weaponDamage = 0;
+                                if (weapon != null) {
+                                    weaponDamage = weapon.getMin()
+                                            + (int) (Math.random() * (weapon.getMax() - weapon.getMin() + 1));
+                                }
+                                int damage = player.attack() + weaponDamage;
+                                monster.takeDamage(damage);
+                                System.out.println("You attack " + monster.getName() + " for " + damage
+                                        + " damage! (Weapon: " + player.getWeaponName() + " dealt " + weaponDamage
+                                        + ")\n");
+                            } else {
+                                System.out.println("Parry is not ready yet! (" + (3 - parryCounter) + " turns left)");
+                                parryCounter++;
+                                monsterTurn();
+                            }
                             validInput = true;
                         }
                         default -> {
@@ -137,7 +183,6 @@ public class BattleEncounter {
             return true;
         } else {
             System.out.println("You were defeated by " + monster.getName() + "...");
-
             gameOver();
             return false;
         }
@@ -147,10 +192,8 @@ public class BattleEncounter {
         monster.getSkill(monster, player);
     }
 
-    public static void gameOver(){
-        System.out.println("\nRIP BOZO\n");
+    public static void gameOver() {
+        System.out.println("\nGAME OVER!\n");
         System.out.println("You'll return to the Main Menu.\n");
-        // RETURN TO MAIN MENU
-        // Maybe display player in-game statistics like in minecraft?
     }
 }

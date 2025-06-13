@@ -12,6 +12,7 @@ public class MonsterSkill {
 
     private static Monster monster;
     private static Player player;
+    private static int moon = 1;
 
     public MonsterSkill() {
     }
@@ -36,11 +37,13 @@ public class MonsterSkill {
             case 32 -> tikbalangSkill();
             case 33 -> tiyanakSkill();
             case 34 -> bruhaSkill();
+            case 41 -> minokawaSkill();
+            case 42 -> bakunawaSkill();
         }
     }
 
     // WOOD MONSTERS
-    private  static void sigbinSkill() {
+    private static void sigbinSkill() {
         int damage = monster.attack();
         player.takeDamage(damage);
         System.out.println(monster.getName() + " ran towards you and attacks you for " + damage + " damage!");
@@ -172,9 +175,18 @@ public class MonsterSkill {
                 2.0;
         };
 
-        if (multiplier == 2.0) {
-            System.out.println(monster.getName() + " unleashes a CHARGED attack!");
-            System.out.println("From now on, " + monster.getName() + " will deal 2x damage!");
+        switch ((int)(multiplier * 100)) {
+            case 0 -> {
+                System.out.println(monster.getName() + "'s attack will get higher the longer the fight.");
+                System.out.println(monster.getName() + " dealt damage 1.0x!");
+            }
+            case 125 -> System.out.println(monster.getName() + " dealt damage 1.0x!");
+            case 150 -> System.out.println(monster.getName() + " dealt damage 1.5x!");
+            case 175 -> System.out.println(monster.getName() + " dealt damage 1.75x!");
+            case 200 -> {
+                System.out.println(monster.getName() + " unleashes a CHARGED attack!");
+                System.out.println("From now on, " + monster.getName() + " will deal 2x damage!");
+            }
         }
 
         damage = (int) (monster.attack() * multiplier);
@@ -185,7 +197,13 @@ public class MonsterSkill {
 
     // Ocean Boss
     private static void bakunawaSkill() {
-
+        if (monster.health < monster.getMaxHealth() / 3 && moon == 1) {
+            System.out.println(monster.getName() + "'s  health has fallen below a third.");
+            System.out.println(monster.getName() + " The sky darkens as Bakunawa devours the moon.");
+            System.out.println("The moon restored " + monster.getName() + "'s health by 50%!");
+            monster.health += monster.getMaxHealth() / 2;
+            moon = 0;
+        }
         int damage = monster.attack();
         player.takeDamage(damage);
         System.out.println(monster.getName() + " attacks you for " + damage + " damage!");

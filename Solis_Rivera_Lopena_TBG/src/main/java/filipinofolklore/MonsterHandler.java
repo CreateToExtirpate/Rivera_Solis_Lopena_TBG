@@ -7,6 +7,9 @@ public class MonsterHandler {
     private static final ArrayList<Monster> woodMonsters = new ArrayList<>();
     private static final ArrayList<Monster> swampMonsters = new ArrayList<>();
     private static final ArrayList<Monster> villageMonsters = new ArrayList<>();
+    
+    private static Monster minokawa;
+    private static Monster bakunawa;
 
     public MonsterHandler() {
         initializeMonsters();
@@ -28,6 +31,10 @@ public class MonsterHandler {
         Monster tiyanak = new Monster("Tiyanak", 200, 30, 40, 20, 33);
         Monster bruha = new Monster("Bruha", 200, 30, 40, 20, 34);
 
+        //BOSSES
+        minokawa = new Monster("Minokawa", 300, 30, 40, 30, 41);
+        bakunawa = new Monster("Bakunawa", 300, 30, 40, 30, 42);
+
         woodMonsters.add(sigbin);
         woodMonsters.add(kapre);
 
@@ -39,6 +46,14 @@ public class MonsterHandler {
         villageMonsters.add(tikbalang);
         villageMonsters.add(tiyanak);
         villageMonsters.add(bruha);
+    }
+
+    public Monster getMinokawa() {
+        return minokawa;
+    }
+
+    public Monster getBakunawa() {
+        return bakunawa;
     }
 
     public ArrayList<Monster> getSpawnPool(int area) {
