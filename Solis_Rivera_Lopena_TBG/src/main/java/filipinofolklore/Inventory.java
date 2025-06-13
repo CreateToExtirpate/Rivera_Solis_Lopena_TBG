@@ -24,7 +24,7 @@ public class Inventory {
         items.put("maruya", createStack(30));
         items.put("bingka", createStack(40));
         items.put("turon", createStack(50));
-        items.put("atis", createStack(60));
+        items.put("puto", createStack(60));
     }
 
     //Creates stacks automatically, pushes the passed integer
@@ -92,7 +92,7 @@ public class Inventory {
                 || choice.equalsIgnoreCase("maruya")
                 || choice.equalsIgnoreCase("bingka")
                 || choice.equalsIgnoreCase("turon")
-                || choice.equalsIgnoreCase("atis")) {
+                || choice.equalsIgnoreCase("puto")) {
             itemName = choice.toLowerCase();
         }
         return itemName;
@@ -166,7 +166,7 @@ public class Inventory {
                     itemHp = 50;
                 }
                 case 4 -> {
-                    randomItem = "atis";
+                    randomItem = "puto";
                     itemHp = 60;
                 }
             }
